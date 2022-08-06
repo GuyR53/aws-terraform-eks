@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejs-app
+  template:
+    metadata:
+      labels:
+        app: nodejs-app
+    spec:
+      containers:
+      - name: nodejs-app
+        image: myACR3211111.azurecr.io/kubernetescicd:{{ .Values.image.tag }}
+        envFrom:
+          - secretRef:
+              name: react-app-prod
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: regcred   

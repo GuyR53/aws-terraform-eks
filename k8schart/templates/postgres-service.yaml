@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  clusterIP: 10.0.168.84
+  selector:
+    app: postgres
+  ports:
+  - port: 5432
+    targetPort: 5432
