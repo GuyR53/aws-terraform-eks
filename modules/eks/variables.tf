@@ -9,3 +9,10 @@ variable "subnetidAZ2" {
 variable "environment" {
   default = ""
 }
+
+variable "publicsecuritygroupid" {
+  default = ""
+}
+variable "vpc_id" {
+  default = ""
+}
