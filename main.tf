@@ -17,6 +17,7 @@ module "eks" {
   source = "./modules/eks"
   subnetidAZ1 = module.networking.public_subnet_id_az1
   subnetidAZ2 = module.networking.public_subnet_id_az2
+  publicsecuritygroupid = module.networking.public_security_group
 }
 
 # Reuse the code that creates ec2 instances in app subnet

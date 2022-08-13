@@ -26,16 +26,35 @@ resource "aws_security_group_rule" "public_in_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["79.180.105.223/32"]
+  cidr_blocks       = ["79.176.148.248/32"]
   security_group_id = aws_security_group.public.id
 }
 # Allow all http to app
-resource "aws_security_group_rule" "public_in_http" {
+resource "aws_security_group_rule" "public_in_http_8080" {
   type              = "ingress"
   from_port         = 8080
   to_port           = 8080
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.public.id
+}
+# Allow all http to app
+resource "aws_security_group_rule" "public_in_http_80" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.public.id
+}
+# allow port 5432 within the cluster
+resource "aws_security_group_rule" "private_in_postgres_5432" {
+  type        = "ingress"
+  from_port   = 5432
+  to_port     = 5432
+  protocol    = "tcp"
+  cidr_blocks = [aws_subnet.PublicSubnet_AZ1.cidr_block, aws_subnet.PublicSubnet_AZ2.cidr_block]
+
   security_group_id = aws_security_group.public.id
 }
 

@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: nodejs-app
-        image: myACR3211111.azurecr.io/kubernetescicd:{{ .Values.image.tag }}
+        #image: myACR3211111.azurecr.io/kubernetescicd:{{ .Values.image.tag }}
+        image: 896438603105.dkr.ecr.us-west-2.amazonaws.com/app:latest
         envFrom:
           - secretRef:
               name: react-app-prod
@@ -27,5 +28,4 @@ spec:
             memory: "128Mi"
         ports:
         - containerPort: 80
-      imagePullSecrets:
-        - name: regcred   
+
